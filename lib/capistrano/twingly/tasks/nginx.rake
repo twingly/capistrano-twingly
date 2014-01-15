@@ -3,6 +3,10 @@ namespace :deploy do
     desc 'Generate Nginx configuration'
     task :generate_config do
       Dir.mkdir('config/nginx') unless Dir.exist?('config/nginx')
+
+      server_names = Array(fetch(:server_names))
+      server_names << "#{APP_NAME}.live.lkp.primelabs.se"
+
       conf = File.open('config/nginx/site.conf', 'w')
       conf << "
         upstream #{APP_NAME} {
@@ -11,7 +15,7 @@ namespace :deploy do
 
         server {
           listen 80;
-          server_name #{APP_NAME}.live.lkp.primelabs.se;
+          server_name #{server_names.join(' ')};
 
           root /home/deploy/#{APP_NAME_WITH_PREFIX}/current/public;
           try_files $uri @app;
