@@ -6,7 +6,7 @@ Capistrano 3 tasks used for Twingly's Ruby deployment
 
 Add this line to your application's Gemfile:
 
-    gem 'capistrano-twingly', git: 'git@github.com:twingly/capistrano-twingly'
+    gem 'capistrano-twingly', github: 'twingly/capistrano-twingly'
 
 And then execute:
 
