@@ -7,3 +7,10 @@ resources = resolver.getresources(
 servers = resources.map(&:target).map(&:to_s)
 
 set :servers_from_srv_record, servers
+
+namespace :list do
+  desc 'List servers from SRV records'
+  task :servers do
+    servers.each { |server| puts server }
+  end
+end
