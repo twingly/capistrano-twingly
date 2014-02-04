@@ -22,6 +22,7 @@ require 'capistrano/twingly/nginx'
 
 # config/deploy.rb
 set :server_names, %w(bamba.bloggportalen.se) # Optional
+set :use_https, true # Optional
 
 namespace deploy do
   after :finishing, 'deploy:nginx:generate_config'

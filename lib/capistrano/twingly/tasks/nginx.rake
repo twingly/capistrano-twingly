@@ -7,6 +7,8 @@ namespace :deploy do
       server_names = Array(fetch(:server_names))
       server_names << "#{APP_NAME}.live.lkp.primelabs.se"
 
+      https_port = ":443" if fetch(:use_https)
+
       conf = File.open('config/nginx/site.conf', 'w')
       conf << "
         upstream #{APP_NAME} {
@@ -25,7 +27,7 @@ namespace :deploy do
             expires off;
             proxy_pass         http://#{APP_NAME};
             proxy_redirect     off;
-            proxy_set_header   Host             $host;
+            proxy_set_header   Host             $host#{https_port};
             proxy_set_header   X-Real-IP        $remote_addr;
             proxy_set_header   X-Forwarded-For  $proxy_add_x_forwarded_for;
           }
