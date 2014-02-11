@@ -40,6 +40,7 @@ namespace :deploy do
     desc 'Upload Nginx configuration'
     task :upload_config do
       on roles(:app) do
+        app_name = fetch(:app_name)
         upload! 'config/nginx/site.conf', "/etc/nginx/sites-available/#{app_name}.conf"
       end
     end
@@ -47,6 +48,7 @@ namespace :deploy do
     desc 'Symlink Nginx configuration'
     task :enable_config do
       on roles(:app) do
+        app_name = fetch(:app_name)
         execute :ln, '-nfs', "/etc/nginx/sites-available/#{app_name}.conf", "/etc/nginx/sites-enabled/#{app_name}.conf"
       end
     end
