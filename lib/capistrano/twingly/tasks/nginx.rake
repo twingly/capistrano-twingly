@@ -4,7 +4,7 @@ namespace :deploy do
     task :generate_config do
       Dir.mkdir('config/nginx') unless Dir.exist?('config/nginx')
 
-      app_dir      = fetch(:application)
+      app_dir      = fetch(:deploy_to)
       app_name     = fetch(:app_name)
       server_names = Array(fetch(:server_names))
       server_names << "#{app_name}.live.lkp.primelabs.se"
@@ -21,7 +21,7 @@ namespace :deploy do
           listen 80;
           server_name #{server_names.join(' ')};
 
-          root /home/deploy/#{app_dir}/current/public;
+          root #{app_dir}/current/public;
           try_files $uri @app;
 
           expires 1h;
