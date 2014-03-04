@@ -25,7 +25,7 @@ set :app_name, 'contest-bamba'
 set :server_names, %w(bamba.bloggportalen.se) # Optional
 set :use_https, true # Optional
 
-namespace deploy do
+namespace :deploy do
   after :finishing, 'deploy:nginx:generate_config'
   after :finishing, 'deploy:nginx:upload_config'
   after :finishing, 'deploy:nginx:enable_config'
