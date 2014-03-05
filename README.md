@@ -41,8 +41,13 @@ require 'capistrano/twingly/upstart'
 
 # config/deploy.rb
 set :procfile_contents, -> {
-  "web: chruby-exec #{fetch(:chruby_ruby)} -- bundle exec " <<
-  "thin start -S /tmp/#{fetch(:app_name)}.thin-1.sock -e #{fetch(:stage)}"
+  contents = ''
+  contents << "web: "
+  contents << "chruby-exec #{fetch(:chruby_ruby)} -- "
+  contents << "bundle exec "
+  contents << "thin start "
+  contents << "-S /tmp/#{fetch(:app_name)}.thin-1.sock "
+  contents << "-e #{fetch(:stage)}"
 }
 
 namespace :deploy do
