@@ -12,7 +12,7 @@ namespace :deploy do
       https_port = ":443" if fetch(:use_https)
 
       conf = File.open('config/nginx/site.conf', 'w')
-      conf << "
+      conf << %Q{
         upstream #{app_name} {
           server unix:/tmp/#{app_name}.thin-1.sock;
         }
@@ -22,9 +22,20 @@ namespace :deploy do
           server_name #{server_names.join(' ')};
 
           root #{app_dir}/current/public;
-          try_files $uri @app;
 
-          expires 1h;
+          try_files /system/maintenance.html $uri @app;
+
+          location /assets {
+            expires 1h;
+          }
+          location /favicon.ico {
+            expires 1h;
+          }
+          location /robots.txt {
+            expires 1h;
+          }
+
+          expires -1;
           location @app {
             expires off;
             proxy_pass         http://#{app_name};
@@ -33,7 +44,7 @@ namespace :deploy do
             proxy_set_header   X-Real-IP        $remote_addr;
             proxy_set_header   X-Forwarded-For  $proxy_add_x_forwarded_for;
           }
-        }\n"
+        }\n}
         conf.close
     end
 
