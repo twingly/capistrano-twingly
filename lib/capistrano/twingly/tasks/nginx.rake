@@ -28,6 +28,12 @@ namespace :deploy do
           location /assets {
             expires 1h;
           }
+          location /favicon.ico {
+            expires 1h;
+          }
+          location /robots.txt {
+            expires 1h;
+          }
 
           expires -1;
           location @app {
