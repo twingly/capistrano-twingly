@@ -33,6 +33,22 @@ namespace :deploy do
             proxy_set_header   X-Real-IP        $remote_addr;
             proxy_set_header   X-Forwarded-For  $proxy_add_x_forwarded_for;
           }
+
+          error_page 503 @503;
+
+          if (-f $document_root/system/maintenance.html) {
+            return 503;
+          }
+
+          location @503 {
+            # Serve static assets if found.
+            if (-f $request_filename) {
+              break;
+            }
+
+            rewrite ^(.*)$ /system/maintenance.html break;
+          }
+
         }\n"
         conf.close
     end
