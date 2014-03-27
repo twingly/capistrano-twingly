@@ -14,6 +14,16 @@ And then execute:
 
 ## Usage
 
+### Deploy current git branch
+
+```Ruby
+# Capfile
+require 'capistrano/twingly/current_git_branch'
+
+# config/deploy/production.rb
+set :branch, Twingly::Git.current_branch
+```
+
 ### Nginx tasks
 
 ```Ruby
