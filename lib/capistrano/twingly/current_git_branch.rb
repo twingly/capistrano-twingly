@@ -1,3 +1,5 @@
+load File.expand_path("../tasks/current_git_branch.rake", __FILE__)
+
 module Twingly
   module Git
     module_function
@@ -7,10 +9,12 @@ module Twingly
       "\e[31m#{str}\e[0m"
     end
 
+    def info
+      "branch #{red(fetch(:branch))} to stage #{red(fetch(:stage))}"
+    end
+
     def current_branch
-      branch = `git symbolic-ref HEAD 2> /dev/null`.strip.gsub(/^refs\/heads\//, '')
-      puts "Deploying branch #{red(branch)} to stage #{red(fetch(:stage))}"
-      branch
+      `git symbolic-ref HEAD 2> /dev/null`.strip.gsub(/^refs\/heads\//, '')
     end
   end
 end
