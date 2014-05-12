@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 Gem::Specification.new do |spec|
   spec.name          = "capistrano-twingly"
-  spec.version       = '1.4.0'
+  spec.version       = '1.5.0'
   spec.authors       = ["Johan Eckerström"]
   spec.email         = ["johan@duh.se"]
   spec.summary       = %q{Capistrano 3 tasks used for Twingly's Ruby deployment}
@@ -17,7 +17,7 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ["lib"]
 
-  spec.add_dependency "capistrano", "~> 3.0.1"
+  spec.add_dependency "capistrano", "~> 3.2.0"
   spec.add_development_dependency "bundler", "~> 1.5"
   spec.add_development_dependency "rake"
 end
