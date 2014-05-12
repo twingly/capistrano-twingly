@@ -2,7 +2,7 @@ namespace :deploy do
   namespace :nginx do
     desc 'Generate Nginx configuration'
     task :generate_config do
-      Dir.mkdir('config/nginx') unless Dir.exist?('config/nginx')
+      Dir.mkdir('tmp') unless Dir.exist?('tmp')
 
       app_dir      = fetch(:deploy_to)
       app_name     = fetch(:app_name)
@@ -11,7 +11,7 @@ namespace :deploy do
 
       https_port = ":443" if fetch(:use_https)
 
-      conf = File.open('config/nginx/site.conf', 'w')
+      conf = File.open('tmp/site.conf', 'w')
       conf << %Q{
         upstream #{app_name} {
           server unix:/tmp/#{app_name}.thin-1.sock;
@@ -52,7 +52,7 @@ namespace :deploy do
     task :upload_config do
       on roles(:app) do
         app_name = fetch(:app_name)
-        upload! 'config/nginx/site.conf', "/etc/nginx/sites-available/#{app_name}.conf"
+        upload! 'tmp/site.conf', "/etc/nginx/sites-available/#{app_name}.conf"
       end
     end
 
