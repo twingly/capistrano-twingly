@@ -8,6 +8,15 @@ namespace :deploy do
     end
   end
 
+  desc 'Create log directory'
+  task :create_log_directory do
+    on roles(:app) do
+      within current_path do
+        execute 'mkdir', '-p', "#{shared_path}/log"
+      end
+    end
+  end
+
   namespace :foreman do
     desc 'Upload Procfile to server'
     task :upload_procfile do
@@ -22,15 +31,6 @@ namespace :deploy do
       conf = File.open('tmp/Procfile', 'w')
       conf << "#{fetch(:procfile_contents)}\n"
       conf.close
-    end
-  end
-
-  desc 'Create log directory'
-  task :create_log_directory do
-    on roles(:app) do
-      within current_path do
-        execute 'mkdir', '-p', "#{shared_path}/log"
-      end
     end
   end
 
