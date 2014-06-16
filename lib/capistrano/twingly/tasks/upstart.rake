@@ -25,6 +25,16 @@ namespace :deploy do
     end
   end
 
+  desc 'Create log directory'
+  task :create_log_directory do
+    on roles(:app) do
+      within current_path do
+        execute 'mkdir', '-p', "#{shared_path}/log"
+      end
+    end
+  end
+
+  before 'deploy:export_upstart', 'deploy:create_log_directory'
   before 'deploy:export_upstart', 'deploy:foreman:upload_procfile'
   before 'deploy:foreman:upload_procfile', 'deploy:foreman:generate_procfile'
 end
