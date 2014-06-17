@@ -12,7 +12,7 @@ namespace :deploy do
   task :create_log_directory do
     on roles(:app) do
       within current_path do
-        execute 'mkdir', '-p', "#{shared_path}/log"
+        execute :mkdir, '-p', "#{shared_path}/log"
       end
     end
   end
