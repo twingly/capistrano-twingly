@@ -8,6 +8,18 @@ namespace :deploy do
     end
   end
 
+  task :disable_autostart do
+    on roles(:app) do
+      execute "/bin/echo manual | sudo /usr/bin/tee /etc/init/#{fetch(:application)}.override"
+    end
+  end
+
+  task :enable_autostart do
+    on roles(:app) do
+      sudo :rm, "/etc/init/#{fetch(:application)}.override"
+    end
+  end
+
   namespace :foreman do
     desc 'Upload Procfile to server'
     task :upload_procfile do
