@@ -16,7 +16,7 @@ namespace :deploy do
 
   task :enable_autostart do
     on roles(:app) do
-      execute "/bin/echo | sudo /usr/bin/tee /etc/init/#{fetch(:application)}.override"
+      sudo :rm, "/etc/init/#{fetch(:application)}.override"
     end
   end
 
