@@ -83,6 +83,9 @@ namespace :deploy do
       sudo :stop, fetch(:application)
     end
   end
+
+  after :stop, 'deploy:disable_autostart'
+  after :start, 'deploy:enable_autostart'
 end
 ```
 
