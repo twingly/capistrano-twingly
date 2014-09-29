@@ -86,6 +86,7 @@ namespace :deploy do
 
   after :stop, 'deploy:disable_autostart'
   after :start, 'deploy:enable_autostart'
+  after :restart, 'deploy:enable_autostart'
 end
 ```
 
