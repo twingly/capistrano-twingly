@@ -1,4 +1,6 @@
 namespace :deploy do
+  set :bundle_binstubs, -> { shared_path.join('bin') }
+
   desc 'Export upstart script'
   task :export_upstart do
     on roles(:app) do
