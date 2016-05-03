@@ -33,9 +33,12 @@ namespace :deploy do
     desc 'Generate Procfile'
     task  :generate_procfile do
       Dir.mkdir('tmp') unless Dir.exist?('tmp')
-      conf = File.open('tmp/Procfile', 'w')
-      conf << "#{fetch(:procfile_contents)}\n"
-      conf.close
+
+      File.open('tmp/Procfile', 'w') do |conf|
+        fetch(:procfile_contents).each_line do |line|
+          conf.puts "#{line.chomp} 2>&1 | logger -t #{fetch(:app_name)}"
+        end
+      end
     end
   end
 
