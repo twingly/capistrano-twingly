@@ -14,7 +14,7 @@ namespace :deploy do
       conf = File.open('tmp/site.conf', 'w')
       conf << %Q{
         upstream #{app_name} {
-          server unix:/tmp/#{app_name}.thin-1.sock;
+          server unix:/tmp/#{app_name}.sock;
         }
 
         server {
