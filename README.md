@@ -55,8 +55,8 @@ set :procfile_contents, -> {
   contents << "web: "
   contents << "chruby-exec #{fetch(:chruby_ruby)} -- "
   contents << "bundle exec "
-  contents << "thin start "
-  contents << "-S /tmp/#{fetch(:app_name)}.sock "
+  contents << "puma "
+  contents << "-b unix:///tmp/#{fetch(:app_name)}.sock "
   contents << "-e #{fetch(:stage)}"
 }
 
