@@ -14,6 +14,19 @@ And then execute:
 
 ## Usage
 
+If you want to require all dependencies ([capistrano], [capistrano-bundler], [capistrano-chruby]) and all task helpers, it is possible to do so with one line:
+
+```Ruby
+# Capfile
+require 'capistrano/twingly'
+```
+
+[capistrano]: https://github.com/capistrano/capistrano
+[capistrano-bundler]: https://github.com/capistrano/capistrano-bundler
+[capistrano-chruby]: https://github.com/capistrano/capistrano-chruby
+
+See below if you want to selectively require tasks. In any case, you need to set variables and specify tasks as demonstrated below.
+
 ### Deploy current git branch
 
 ```Ruby
