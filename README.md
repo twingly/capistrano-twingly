@@ -143,4 +143,8 @@ end
 
         github_changelog_generator
 
+## Note about `CHANGELOG.md`
+
+The changelog is incorrect for some old versions, where the version was increased before the pull request was merged. This is due to how `github_changelog_generator` works.
+
 [twingly-rubygems]: https://rubygems.org/profiles/twingly
