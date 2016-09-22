@@ -1,8 +1,7 @@
 # Change Log
 
-## [Unreleased](https://github.com/twingly/capistrano-twingly/tree/HEAD)
-
-[Full Changelog](https://github.com/twingly/capistrano-twingly/compare/v2.0.1...HEAD)
+## [v2.1.0](https://github.com/twingly/capistrano-twingly/tree/v2.1.0) (2016-09-22)
+[Full Changelog](https://github.com/twingly/capistrano-twingly/compare/v2.0.1...v2.1.0)
 
 **Fixed bugs:**
 
