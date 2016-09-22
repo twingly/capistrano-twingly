@@ -127,11 +127,20 @@ fetch(:servers_from_srv_record).each do |hostname|
 end
 ```
 
+## Release workflow
 
-## Contributing
+* Update the examples in this README if needed.
 
-1. Fork it ( http://github.com/twingly/capistrano-twingly/fork )
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create new Pull Request
+* Bump the version in `capistrano-twingly.gemspec` in a commit, no need to push (the release task does that).
+
+* Build and [publish](http://guides.rubygems.org/publishing/) the gem. This will create the proper tag in git, push the commit and tag and upload to RubyGems.
+
+        bundle exec rake release
+
+    * If you are not logged in as [twingly][twingly-rubygems] with ruby gems, the rake task will fail and tell you to set credentials via `gem push`, do that and run the `release` task again. It will be okay.
+
+* Update the changelog with [GitHub Changelog Generator](https://github.com/skywinder/github-changelog-generator/) (`gem install github_changelog_generator` if you don't have it, set `CHANGELOG_GITHUB_TOKEN` to a personal access token to avoid rate limiting by GitHub). This command will update `CHANGELOG.md`, commit and push manually.
+
+        github_changelog_generator
+
+[twingly-rubygems]: https://rubygems.org/profiles/twingly
