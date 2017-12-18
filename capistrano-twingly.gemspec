@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 Gem::Specification.new do |spec|
   spec.name          = "capistrano-twingly"
-  spec.version       = '2.1.0'
+  spec.version       = '2.2.0'
   spec.authors       = ["Twingly AB"]
   spec.email         = ["support@twingly.com"]
   spec.summary       = %q{Capistrano 3 tasks used for Twingly's Ruby deployment}
