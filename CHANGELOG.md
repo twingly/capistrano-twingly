@@ -1,5 +1,17 @@
 # Change Log
 
+## [v2.2.0](https://github.com/twingly/capistrano-twingly/tree/v2.2.0) (2017-12-18)
+[Full Changelog](https://github.com/twingly/capistrano-twingly/compare/v2.1.0...v2.2.0)
+
+**Implemented enhancements:**
+
+- Support ed25519 SSH keys [\#38](https://github.com/twingly/capistrano-twingly/issues/38)
+- Release gem to rubygems.org [\#24](https://github.com/twingly/capistrano-twingly/issues/24)
+
+**Merged pull requests:**
+
+- Be able to use the gem with ssh-ed25519 keys [\#39](https://github.com/twingly/capistrano-twingly/pull/39) ([dentarg](https://github.com/dentarg))
+
 ## [v2.1.0](https://github.com/twingly/capistrano-twingly/tree/v2.1.0) (2016-09-22)
 [Full Changelog](https://github.com/twingly/capistrano-twingly/compare/v2.0.1...v2.1.0)
 
