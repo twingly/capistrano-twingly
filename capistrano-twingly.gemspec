@@ -21,6 +21,11 @@ Gem::Specification.new do |spec|
   spec.add_dependency "capistrano-bundler", "1.1.4"
   spec.add_dependency "capistrano-chruby", "0.1.2"
   spec.add_dependency "foreman", "~> 0.82"
+  spec.add_dependency "rbnacl", ">= 3.2", "< 5.0"
+  spec.add_dependency "rbnacl-libsodium"
+  spec.add_dependency "bcrypt_pbkdf", ">= 1.0", "< 2.0"
+
   spec.add_development_dependency "bundler", "~> 1.5"
+  spec.add_development_dependency "rspec", "~> 3"
   spec.add_development_dependency "rake"
 end
