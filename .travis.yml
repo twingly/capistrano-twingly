@@ -1,0 +1,28 @@
+language: ruby
+sudo: false
+
+rvm:
+  - 2.4.2
+  - ruby-head
+
+matrix:
+  allow_failures:
+    - rvm: ruby-head
+  fast_finish: true
+
+before_install:
+  - gem install bundler
+
+cache: bundler
+
+notifications:
+  email: false
+  hipchat:
+    rooms:
+      secure: "ILGWgc1QgHVRhwxWgYo+DxLySgOPdwahOV8py1dlRhi4juRUvMcMJSFYvTS47T1Mm8JSJXGaJtEcz24YgWF4XQsL2OawntdxJDNuzmFhF0fC+syN3qHXVzaRIplfcbGOj5rW4Uga8HumvvrQl/g5fscgsGM02BAOKgJhRPM7YLY="
+    on_success: never
+    on_failure: change
+    template:
+    - '%{repository}#%{build_number} (%{branch} - %{commit} : %{author}): %{message}
+      (<a href="%{build_url}">Details</a>/<a href="%{compare_url}">Change view</a>)'
+    format: html
