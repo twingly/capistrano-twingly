@@ -25,8 +25,8 @@ namespace :deploy do
   namespace :foreman do
     desc 'Upload Procfile to server'
     task :upload_procfile do
-      on roles(:app) do
-        upload! 'tmp/Procfile', "#{fetch(:deploy_to)}/current/Procfile"
+      on roles(:app) do |host|
+        upload! "tmp/Procfile_#{host.name}", "#{fetch(:deploy_to)}/current/Procfile"
       end
     end
 
@@ -34,9 +34,20 @@ namespace :deploy do
     task  :generate_procfile do
       Dir.mkdir('tmp') unless Dir.exist?('tmp')
 
-      File.open('tmp/Procfile', 'w') do |conf|
-        fetch(:procfile_contents).each_line do |line|
-          conf.puts "#{line.chomp} 2>&1 | logger -t #{fetch(:app_name)}"
+      procfile_contents_by_host = fetch(:procfile_contents_by_host)
+
+      on roles(:app) do |host|
+        procfile_contents =
+          if procfile_contents_by_host
+            procfile_contents_by_host.fetch(host.hostname)
+          else
+            fetch(:procfile_contents)
+          end
+
+        File.open("tmp/Procfile_#{host.hostname}", 'w') do |conf|
+          procfile_contents.each_line do |line|
+            conf.puts "#{line.chomp} 2>&1 | logger -t #{fetch(:app_name)}"
+          end
         end
       end
     end

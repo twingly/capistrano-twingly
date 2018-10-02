@@ -103,6 +103,23 @@ namespace :deploy do
 end
 ```
 
+It's also possible to use a different Procfile for each host:
+
+```ruby
+# config/deploy.rb
+set :procfile_contents_by_host, -> {
+  procfiles_by_host = {}
+
+  fetch(:servers_from_srv_record).each do |hostname|
+    contents = "web: CURRENT_HOST=#{hostname} bundle exec puma"
+
+    procfile_by_host[hostname] = contents
+  end
+
+  procfiles_by_host
+}
+```
+
 ### Tag deploys in Git
 
 ```Ruby
