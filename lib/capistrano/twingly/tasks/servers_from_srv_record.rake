@@ -1,14 +1,17 @@
 require 'resolv'
 
-SRV_RECORD = '_rubyapps._tcp.live.lkp.primelabs.se'
+SRV_RECORDS = %w[
+  _rubyapps._tcp.live.lkp.primelabs.se
+  _rubyapps._tcp.sth.twingly.network
+]
 
 resolver = Resolv::DNS.new
-resources = resolver.getresources(
-  SRV_RECORD,
-  Resolv::DNS::Resource::IN::SRV)
-servers = resources.map(&:target).map(&:to_s)
 
-raise "Can't find any servers, no records for #{SRV_RECORD}" if servers.empty?
+servers = SRV_RECORDS.map do |srv_record|
+  resolver.getresources(srv_record, Resolv::DNS::Resource::IN::SRV)
+end.flatten.map(&:target).map(&:to_s)
+
+raise "Can't find any servers, no records for #{SRV_RECORDS}" if servers.empty?
 
 set :servers_from_srv_record, servers
 
