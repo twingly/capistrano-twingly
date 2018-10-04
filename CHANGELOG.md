@@ -1,5 +1,12 @@
 # Change Log
 
+## [v2.3.0](https://github.com/twingly/capistrano-twingly/tree/v2.3.0) (2018-10-04)
+[Full Changelog](https://github.com/twingly/capistrano-twingly/compare/v2.2.0...v2.3.0)
+
+**Merged pull requests:**
+
+- Lookup app servers using multiple SRV records [\#42](https://github.com/twingly/capistrano-twingly/pull/42) ([roback](https://github.com/roback))
+
 ## [v2.2.0](https://github.com/twingly/capistrano-twingly/tree/v2.2.0) (2017-12-18)
 [Full Changelog](https://github.com/twingly/capistrano-twingly/compare/v2.1.0...v2.2.0)
 
