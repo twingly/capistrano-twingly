@@ -103,20 +103,18 @@ namespace :deploy do
 end
 ```
 
-It's also possible to use a different Procfile for each host:
+It's also possible to use a different Procfile for each host by setting `procfile_contents` to a Hash:
 
 ```ruby
 # config/deploy.rb
-set :procfile_contents_by_host, -> {
-  procfiles_by_host = {}
+set :procfile_contents, -> {
+  servers = fetch(:servers_from_srv_record)
 
-  fetch(:servers_from_srv_record).each do |hostname|
+  servers.each_with_object({}) do |hostname, procfiles_by_host|
     contents = "web: CURRENT_HOST=#{hostname} bundle exec puma"
 
-    procfile_by_host[hostname] = contents
+    procfiles_by_host[hostname] = contents
   end
-
-  procfiles_by_host
 }
 ```
 

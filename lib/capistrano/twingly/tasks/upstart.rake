@@ -34,18 +34,18 @@ namespace :deploy do
     task  :generate_procfile do
       Dir.mkdir('tmp') unless Dir.exist?('tmp')
 
-      procfile_contents_by_host = fetch(:procfile_contents_by_host)
+      procfile_contents = fetch(:procfile_contents)
 
       on roles(:app) do |host|
-        procfile_contents =
-          if procfile_contents_by_host
-            procfile_contents_by_host.fetch(host.hostname)
+        procfile_contents_string =
+          if procfile_contents.is_a?(Hash)
+            procfile_contents.fetch(host.hostname)
           else
-            fetch(:procfile_contents)
+            procfile_contents
           end
 
         File.open("tmp/Procfile_#{host.hostname}", 'w') do |conf|
-          procfile_contents.each_line do |line|
+          procfile_contents_string.each_line do |line|
             conf.puts "#{line.chomp} 2>&1 | logger -t #{fetch(:app_name)}"
           end
         end
