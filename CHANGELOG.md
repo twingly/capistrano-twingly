@@ -1,5 +1,12 @@
 # Change Log
 
+## [v2.4.0](https://github.com/twingly/capistrano-twingly/tree/v2.4.0) (2018-10-04)
+[Full Changelog](https://github.com/twingly/capistrano-twingly/compare/v2.3.0...v2.4.0)
+
+**Merged pull requests:**
+
+- Each server can have different Procfiles [\#43](https://github.com/twingly/capistrano-twingly/pull/43) ([roback](https://github.com/roback))
+
 ## [v2.3.0](https://github.com/twingly/capistrano-twingly/tree/v2.3.0) (2018-10-04)
 [Full Changelog](https://github.com/twingly/capistrano-twingly/compare/v2.2.0...v2.3.0)
 
