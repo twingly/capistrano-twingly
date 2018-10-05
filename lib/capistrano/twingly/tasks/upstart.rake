@@ -26,7 +26,7 @@ namespace :deploy do
     desc 'Upload Procfile to server'
     task :upload_procfile do
       on roles(:app) do |host|
-        upload! "tmp/Procfile_#{host.name}", "#{fetch(:deploy_to)}/current/Procfile"
+        upload! "tmp/Procfile_#{host.hostname}", "#{fetch(:deploy_to)}/current/Procfile"
       end
     end
 
