@@ -1,5 +1,8 @@
 # Change Log
 
+## [v2.4.1](https://github.com/twingly/capistrano-twingly/tree/v2.4.1) (2018-10-05)
+[Full Changelog](https://github.com/twingly/capistrano-twingly/compare/v2.4.0...v2.4.1)
+
 ## [v2.4.0](https://github.com/twingly/capistrano-twingly/tree/v2.4.0) (2018-10-04)
 [Full Changelog](https://github.com/twingly/capistrano-twingly/compare/v2.3.0...v2.4.0)
 
