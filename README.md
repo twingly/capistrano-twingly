@@ -45,7 +45,7 @@ require 'capistrano/twingly/nginx'
 
 # config/deploy.rb
 set :app_name, 'contest-bamba'
-set :server_names, %w(bamba.bloggportalen.se) # Optional
+set :server_names, %w(bamba.bloggportalen.se)
 set :use_https, true # Optional
 
 namespace :deploy do
