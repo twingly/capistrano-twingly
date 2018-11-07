@@ -7,7 +7,6 @@ namespace :deploy do
       app_dir      = fetch(:deploy_to)
       app_name     = fetch(:app_name)
       server_names = Array(fetch(:server_names))
-      server_names << "#{app_name}.live.lkp.primelabs.se"
 
       https_port = ":443" if fetch(:use_https)
 
