@@ -1,7 +1,6 @@
 require 'resolv'
 
 SRV_RECORDS = %w[
-  _rubyapps._tcp.live.lkp.primelabs.se
   _rubyapps._tcp.sth.twingly.network
 ]
 
