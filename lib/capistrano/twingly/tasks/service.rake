@@ -20,6 +20,44 @@ namespace :deploy do
     end
   end
 
+  desc "Start application"
+  task :start do
+    invoke "deploy:export_service"
+
+    on roles(:upstart) do
+      sudo :start, fetch(:application)
+    end
+
+    on roles(:systemd) do
+      sudo :systemctl, "start #{fetch(:application)}.target"
+    end
+  end
+
+  desc "Restart application"
+  task :restart do
+    invoke "deploy:export_service"
+
+    on roles(:upstart) do
+      execute "sudo restart #{fetch(:application)} || sudo start #{fetch(:application)}"
+    end
+
+    on roles(:systemd) do
+      application = fetch(:application)
+      execute "sudo systemctl restart #{application}.target || sudo systemctl start #{application}.target"
+    end
+  end
+
+  desc "Stop application"
+  task :stop do
+    on roles(:upstart) do
+      sudo :stop, fetch(:application)
+    end
+
+    on roles(:systemd) do
+      sudo :systemctl, "stop #{fetch(:application)}.target"
+    end
+  end
+
   task :disable_autostart do
     on roles(:upstart) do
       execute "/bin/echo manual | sudo /usr/bin/tee /etc/init/#{fetch(:application)}.override"
