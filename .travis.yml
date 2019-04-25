@@ -8,7 +8,7 @@ matrix:
     - rvm: ruby-head
   fast_finish: true
 before_install:
-  - gem install bundler
+  - gem install bundler -v '<2.0'
 cache: bundler
 notifications:
   email: false
