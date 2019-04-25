@@ -1,24 +1,42 @@
 namespace :deploy do
   set :bundle_binstubs, -> { shared_path.join('bin') }
 
-  desc 'Export upstart script'
-  task :export_upstart do
-    on roles(:app) do
+  desc 'Export service script'
+  task :export_service do
+    on roles(:upstart) do
       within current_path do
         sudo fetch(:chruby_exec), "#{fetch(:chruby_ruby)} -- #{fetch(:bundle_binstubs)}/foreman export upstart /etc/init -a #{fetch(:application)} -u \`whoami\` -l #{shared_path}/log"
       end
     end
+
+    on roles(:systemd) do
+      sudo :systemctl, "stop #{fetch(:application)}.target"
+
+      within current_path do
+        sudo fetch(:chruby_exec), "#{fetch(:chruby_ruby)} -- #{fetch(:bundle_binstubs)}/foreman export systemd /etc/systemd/system -a #{fetch(:application)} -u \`whoami\` -l #{shared_path}/log"
+      end
+
+      sudo :systemctl, "daemon-reload"
+    end
   end
 
   task :disable_autostart do
-    on roles(:app) do
+    on roles(:upstart) do
       execute "/bin/echo manual | sudo /usr/bin/tee /etc/init/#{fetch(:application)}.override"
+    end
+
+    on roles(:systemd) do
+      sudo :systemctl, "disable #{fetch(:application)}.target"
     end
   end
 
   task :enable_autostart do
-    on roles(:app) do
+    on roles(:upstart) do
       execute "/bin/echo | sudo /usr/bin/tee /etc/init/#{fetch(:application)}.override"
+    end
+
+    on roles(:systemd) do
+      sudo :systemctl, "enable #{fetch(:application)}.target"
     end
   end
 
@@ -53,6 +71,6 @@ namespace :deploy do
     end
   end
 
-  before 'deploy:export_upstart', 'deploy:foreman:upload_procfile'
+  before 'deploy:export_service', 'deploy:foreman:upload_procfile'
   before 'deploy:foreman:upload_procfile', 'deploy:foreman:generate_procfile'
 end

@@ -56,11 +56,11 @@ namespace :deploy do
 end
 ```
 
-### Upstart
+### Upstart/Systemd
 
 ```Ruby
 # Capfile
-require 'capistrano/twingly/upstart'
+require 'capistrano/twingly/service'
 
 # config/deploy.rb
 set :procfile_contents, -> {
@@ -74,26 +74,41 @@ set :procfile_contents, -> {
 }
 
 namespace :deploy do
-  desc 'Start application'
+  desc "Start application"
   task :start do
-    invoke 'deploy:export_upstart'
-    on roles(:app) do
+    invoke "deploy:export_service"
+
+    on roles(:upstart) do
       sudo :start, fetch(:application)
     end
-  end
 
-  desc 'Restart application'
-  task :restart do
-    invoke 'deploy:export_upstart'
-    on roles(:app) do
-      execute "sudo restart #{fetch(:application)} || sudo start #{fetch(:application)}"
+    on roles(:systemd) do
+      sudo :systemctl, "start #{fetch(:application)}.target"
     end
   end
 
-  desc 'Stop application'
+  desc "Restart application"
+  task :restart do
+    invoke "deploy:export_service"
+
+    on roles(:upstart) do
+      execute "sudo restart #{fetch(:application)} || sudo start #{fetch(:application)}"
+    end
+
+    on roles(:systemd) do
+      application = fetch(:application)
+      execute "sudo systemctl restart #{application}.target || sudo systemctl start #{application}.target"
+    end
+  end
+
+  desc "Stop application"
   task :stop do
-    on roles(:app) do
+    on roles(:upstart) do
       sudo :stop, fetch(:application)
+    end
+
+    on roles(:systemd) do
+      sudo :systemctl, "stop #{fetch(:application)}.target"
     end
   end
 
@@ -132,13 +147,15 @@ end
 
 ### Fetch servers from SRV record
 
+*Note: Each server needs to either have the `systemd` or `upstart` role (in addition to `app`) depending on which service management system is used on the server.*
+
 ```Ruby
 # Capfile
 require 'capistrano/twingly/servers_from_srv_record'
 
 # config/deploy/production.rb
 fetch(:servers_from_srv_record).each do |hostname|
-  server hostname, user: 'deploy', roles: %w{app}
+  server hostname, user: 'deploy', roles: %w{app systemd}
 end
 ```
 
