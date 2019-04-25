@@ -1,24 +1,25 @@
 namespace :deploy do
   set :bundle_binstubs, -> { shared_path.join('bin') }
 
-  desc 'Export upstart script'
-  task :export_upstart do
+  desc 'Export systemd script'
+  task :export_systemd do
     on roles(:app) do
       within current_path do
-        sudo fetch(:chruby_exec), "#{fetch(:chruby_ruby)} -- #{fetch(:bundle_binstubs)}/foreman export upstart /etc/init -a #{fetch(:application)} -u \`whoami\` -l #{shared_path}/log"
+        sudo fetch(:chruby_exec), "#{fetch(:chruby_ruby)} -- #{fetch(:bundle_binstubs)}/foreman export systemd /etc/systemd/system -a #{fetch(:application)} -u \`whoami\` -l #{shared_path}/log"
+        sudo "/bin/systemctl", "daemon-reload"
       end
     end
   end
 
   task :disable_autostart do
     on roles(:app) do
-      execute "/bin/echo manual | sudo /usr/bin/tee /etc/init/#{fetch(:application)}.override"
+      sudo "/bin/systemctl", "disable #{fetch(:application)}.target"
     end
   end
 
   task :enable_autostart do
     on roles(:app) do
-      execute "/bin/echo | sudo /usr/bin/tee /etc/init/#{fetch(:application)}.override"
+      sudo "/bin/systemctl", "enable #{fetch(:application)}.target"
     end
   end
 
@@ -53,6 +54,9 @@ namespace :deploy do
     end
   end
 
-  before 'deploy:export_upstart', 'deploy:foreman:upload_procfile'
+  # Stop the service to make sure all old systemd units gets unloaded
+  before 'deploy:export_systemd', 'deploy:stop'
+
+  before 'deploy:export_systemd', 'deploy:foreman:upload_procfile'
   before 'deploy:foreman:upload_procfile', 'deploy:foreman:generate_procfile'
 end
