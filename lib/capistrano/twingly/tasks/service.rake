@@ -3,13 +3,13 @@ namespace :deploy do
 
   desc 'Lookup which service manager is used on each server'
   task :lookup_server_service_manager do
+    systemd_pid = 1
+
     on roles(:app) do |host|
-      systemd_is_installed = execute "command -v systemctl",
-                                     raise_on_non_zero_exit: false
+      service_manager_name =
+        capture "ps -p#{systemd_pid} co command | grep systemd || echo upstart"
 
-      role = systemd_is_installed ? :systemd : :upstart
-
-      server(host).add_role(role)
+      server(host).add_role(service_manager_name.to_sym)
     end
   end
 
