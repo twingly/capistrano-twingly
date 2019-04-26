@@ -109,15 +109,13 @@ end
 
 ### Fetch servers from SRV record
 
-*Note: Each server needs to either have the `systemd` or `upstart` role (in addition to `app`) depending on which service management system is used on the server.*
-
 ```Ruby
 # Capfile
 require 'capistrano/twingly/servers_from_srv_record'
 
 # config/deploy/production.rb
 fetch(:servers_from_srv_record).each do |hostname|
-  server hostname, user: 'deploy', roles: %w{app systemd}
+  server hostname, user: 'deploy', roles: %w{app}
 end
 ```
 
