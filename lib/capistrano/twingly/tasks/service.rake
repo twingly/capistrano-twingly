@@ -14,7 +14,7 @@ namespace :deploy do
   end
 
   desc 'Export service script'
-  task export_service: "deploy:lookup_server_service_manager" do
+  task export_service: %w[deploy:lookup_server_service_manager deploy:foreman:upload_procfile] do
     on roles(:upstart) do
       within current_path do
         sudo fetch(:chruby_exec), "#{fetch(:chruby_ruby)} -- #{fetch(:bundle_binstubs)}/foreman export upstart /etc/init -a #{fetch(:application)} -u \`whoami\` -l #{shared_path}/log"
@@ -92,7 +92,7 @@ namespace :deploy do
 
   namespace :foreman do
     desc 'Upload Procfile to server'
-    task :upload_procfile do
+    task upload_procfile: "deploy:foreman:generate_procfile" do
       on roles(:app) do |host|
         upload! "tmp/Procfile_#{host.hostname}", "#{fetch(:deploy_to)}/current/Procfile"
       end
@@ -120,7 +120,4 @@ namespace :deploy do
       end
     end
   end
-
-  before 'deploy:export_service', 'deploy:foreman:upload_procfile'
-  before 'deploy:foreman:upload_procfile', 'deploy:foreman:generate_procfile'
 end
