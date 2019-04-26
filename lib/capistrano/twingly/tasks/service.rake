@@ -1,6 +1,18 @@
 namespace :deploy do
   set :bundle_binstubs, -> { shared_path.join('bin') }
 
+  desc 'Lookup which service manager is used on each server'
+  task :lookup_server_service_manager do
+    on roles(:app) do |host|
+      systemd_is_installed = execute "command -v systemctl",
+                                     raise_on_non_zero_exit: false
+
+      role = systemd_is_installed ? :systemd : :upstart
+
+      server(host).add_role(role)
+    end
+  end
+
   desc 'Export service script'
   task :export_service do
     on roles(:upstart) do
@@ -108,6 +120,13 @@ namespace :deploy do
       end
     end
   end
+
+  before 'deploy:export_service', 'deploy:lookup_server_service_manager'
+  before 'deploy:start', 'deploy:lookup_server_service_manager'
+  before 'deploy:restart', 'deploy:lookup_server_service_manager'
+  before 'deploy:stop', 'deploy:lookup_server_service_manager'
+  before 'deploy:disable_autostart', 'deploy:lookup_server_service_manager'
+  before 'deploy:enable_autostart', 'deploy:lookup_server_service_manager'
 
   before 'deploy:export_service', 'deploy:foreman:upload_procfile'
   before 'deploy:foreman:upload_procfile', 'deploy:foreman:generate_procfile'
