@@ -56,11 +56,11 @@ namespace :deploy do
 end
 ```
 
-### Upstart
+### Upstart/Systemd
 
 ```Ruby
 # Capfile
-require 'capistrano/twingly/upstart'
+require 'capistrano/twingly/service'
 
 # config/deploy.rb
 set :procfile_contents, -> {
@@ -74,29 +74,6 @@ set :procfile_contents, -> {
 }
 
 namespace :deploy do
-  desc 'Start application'
-  task :start do
-    invoke 'deploy:export_upstart'
-    on roles(:app) do
-      sudo :start, fetch(:application)
-    end
-  end
-
-  desc 'Restart application'
-  task :restart do
-    invoke 'deploy:export_upstart'
-    on roles(:app) do
-      execute "sudo restart #{fetch(:application)} || sudo start #{fetch(:application)}"
-    end
-  end
-
-  desc 'Stop application'
-  task :stop do
-    on roles(:app) do
-      sudo :stop, fetch(:application)
-    end
-  end
-
   after :stop, 'deploy:disable_autostart'
   after :start, 'deploy:enable_autostart'
   after :restart, 'deploy:enable_autostart'
