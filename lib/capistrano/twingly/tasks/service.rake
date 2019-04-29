@@ -14,7 +14,7 @@ namespace :deploy do
   end
 
   desc 'Export service script'
-  task export_service: %w[deploy:lookup_server_service_manager deploy:foreman:upload_procfile] do
+  task export_service: %w[lookup_server_service_manager foreman:upload_procfile] do
     on roles(:upstart) do
       within current_path do
         sudo fetch(:chruby_exec), "#{fetch(:chruby_ruby)} -- #{fetch(:bundle_binstubs)}/foreman export upstart /etc/init -a #{fetch(:application)} -u \`whoami\` -l #{shared_path}/log"
@@ -33,7 +33,7 @@ namespace :deploy do
   end
 
   desc "Start application"
-  task start: "deploy:lookup_server_service_manager" do
+  task start: :lookup_server_service_manager do
     invoke "deploy:export_service"
 
     on roles(:upstart) do
@@ -46,7 +46,7 @@ namespace :deploy do
   end
 
   desc "Restart application"
-  task restart: "deploy:lookup_server_service_manager" do
+  task restart: :lookup_server_service_manager do
     invoke "deploy:export_service"
 
     on roles(:upstart) do
@@ -60,7 +60,7 @@ namespace :deploy do
   end
 
   desc "Stop application"
-  task stop: "deploy:lookup_server_service_manager" do
+  task stop: :lookup_server_service_manager do
     on roles(:upstart) do
       sudo :stop, fetch(:application)
     end
@@ -70,7 +70,7 @@ namespace :deploy do
     end
   end
 
-  task disable_autostart: "deploy:lookup_server_service_manager" do
+  task disable_autostart: :lookup_server_service_manager do
     on roles(:upstart) do
       execute "/bin/echo manual | sudo /usr/bin/tee /etc/init/#{fetch(:application)}.override"
     end
@@ -80,7 +80,7 @@ namespace :deploy do
     end
   end
 
-  task enable_autostart: "deploy:lookup_server_service_manager" do
+  task enable_autostart: :lookup_server_service_manager do
     on roles(:upstart) do
       execute "/bin/echo | sudo /usr/bin/tee /etc/init/#{fetch(:application)}.override"
     end
@@ -92,7 +92,7 @@ namespace :deploy do
 
   namespace :foreman do
     desc 'Upload Procfile to server'
-    task upload_procfile: "deploy:foreman:generate_procfile" do
+    task upload_procfile: :generate_procfile do
       on roles(:app) do |host|
         upload! "tmp/Procfile_#{host.hostname}", "#{fetch(:deploy_to)}/current/Procfile"
       end
