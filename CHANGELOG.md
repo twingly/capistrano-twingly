@@ -1,5 +1,16 @@
 # Change Log
 
+## [v4.0.0](https://github.com/twingly/capistrano-twingly/tree/v4.0.0) (2019-04-29)
+[Full Changelog](https://github.com/twingly/capistrano-twingly/compare/v3.0.0...v4.0.0)
+
+**Closed issues:**
+
+- Add systemd support [\#45](https://github.com/twingly/capistrano-twingly/issues/45)
+
+**Merged pull requests:**
+
+- Generate systemd config in addition to upstart [\#47](https://github.com/twingly/capistrano-twingly/pull/47) ([roback](https://github.com/roback))
+
 ## [v3.0.0](https://github.com/twingly/capistrano-twingly/tree/v3.0.0) (2018-11-08)
 [Full Changelog](https://github.com/twingly/capistrano-twingly/compare/v2.4.1...v3.0.0)
 
