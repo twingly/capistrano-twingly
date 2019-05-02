@@ -1,5 +1,16 @@
 # Change Log
 
+## [v4.0.1](https://github.com/twingly/capistrano-twingly/tree/v4.0.1) (2019-05-02)
+[Full Changelog](https://github.com/twingly/capistrano-twingly/compare/v4.0.0...v4.0.1)
+
+**Fixed bugs:**
+
+- Initial deploy for systemd fails since \#47 [\#49](https://github.com/twingly/capistrano-twingly/issues/49)
+
+**Merged pull requests:**
+
+- Make sure systemd target is loaded before trying to stop it [\#50](https://github.com/twingly/capistrano-twingly/pull/50) ([roback](https://github.com/roback))
+
 ## [v4.0.0](https://github.com/twingly/capistrano-twingly/tree/v4.0.0) (2019-04-29)
 [Full Changelog](https://github.com/twingly/capistrano-twingly/compare/v3.0.0...v4.0.0)
 
