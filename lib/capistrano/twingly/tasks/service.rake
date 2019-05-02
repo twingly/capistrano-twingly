@@ -22,7 +22,12 @@ namespace :deploy do
     end
 
     on roles(:systemd) do
-      sudo :systemctl, "stop #{fetch(:application)}.target"
+      load_state =
+        capture "systemctl show #{fetch(:application)}.target -p LoadState --value"
+
+      if load_state == "loaded"
+        sudo :systemctl, "stop #{fetch(:application)}.target"
+      end
 
       within current_path do
         sudo fetch(:chruby_exec), "#{fetch(:chruby_ruby)} -- #{fetch(:bundle_binstubs)}/foreman export systemd /etc/systemd/system -a #{fetch(:application)} -u \`whoami\` -l #{shared_path}/log"
