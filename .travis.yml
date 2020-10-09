@@ -1,14 +1,11 @@
 language: ruby
 rvm:
-  - 2.6.5
+  - 2.7.1
   - ruby-head
 matrix:
   allow_failures:
     - rvm: ruby-head
   fast_finish: true
-before_install:
-  - gem uninstall -v '>= 2' -i $(rvm gemdir)@global -ax bundler || true
-  - gem install bundler -v '< 2'
 cache: bundler
 notifications:
   email: false

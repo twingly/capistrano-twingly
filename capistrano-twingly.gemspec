@@ -25,7 +25,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency "ed25519", ">= 1.2", "< 1.3"
   spec.add_dependency "bcrypt_pbkdf", ">= 1.0", "< 2.0"
 
-  spec.add_development_dependency "bundler", "~> 1.5"
   spec.add_development_dependency "rspec", "~> 3"
   spec.add_development_dependency "rake"
 end
