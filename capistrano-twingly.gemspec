@@ -17,8 +17,8 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ["lib"]
 
-  spec.add_dependency "capistrano", "~> 3.6.0"
-  spec.add_dependency "capistrano-bundler", "1.1.4"
+  spec.add_dependency "capistrano", "~> 3.14"
+  spec.add_dependency "capistrano-bundler", "~> 2.0"
   spec.add_dependency "capistrano-chruby", "0.1.2"
   spec.add_dependency "foreman", "~> 0.82"
   spec.add_dependency "net-ssh", "~> 5.0"

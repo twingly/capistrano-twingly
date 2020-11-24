@@ -1,6 +1,4 @@
 namespace :deploy do
-  set :bundle_binstubs, -> { shared_path.join('bin') }
-
   desc 'Lookup which service manager is used on each server'
   task :lookup_server_service_manager do
     init_system_pid = 1
@@ -15,6 +13,8 @@ namespace :deploy do
 
   desc 'Export service script'
   task export_service: %w[lookup_server_service_manager foreman:upload_procfile] do
+    set :bundle_binstubs, -> { shared_path.join('bin') }
+
     on roles(:upstart) do
       within current_path do
         sudo fetch(:chruby_exec), "#{fetch(:chruby_ruby)} -- #{fetch(:bundle_binstubs)}/foreman export upstart /etc/init -a #{fetch(:application)} -u \`whoami\` -l #{shared_path}/log"
