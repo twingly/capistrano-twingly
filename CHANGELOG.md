@@ -1,5 +1,18 @@
 # Changelog
 
+## [v4.0.3](https://github.com/twingly/capistrano-twingly/tree/v4.0.3) (2021-01-14)
+
+[Full Changelog](https://github.com/twingly/capistrano-twingly/compare/v4.0.2...v4.0.3)
+
+**Implemented enhancements:**
+
+- Deprecation warnings from capistrano-bundler [\#61](https://github.com/twingly/capistrano-twingly/issues/61)
+
+**Merged pull requests:**
+
+- Explicitly use the git plugin [\#60](https://github.com/twingly/capistrano-twingly/pull/60) ([walro](https://github.com/walro))
+- Trigger CI on pull-request events [\#59](https://github.com/twingly/capistrano-twingly/pull/59) ([walro](https://github.com/walro))
+
 ## [v4.0.2](https://github.com/twingly/capistrano-twingly/tree/v4.0.2) (2020-11-24)
 
 [Full Changelog](https://github.com/twingly/capistrano-twingly/compare/v4.0.1...v4.0.2)
