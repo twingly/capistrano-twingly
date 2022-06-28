@@ -1,5 +1,15 @@
 # Changelog
 
+## [v4.0.4](https://github.com/twingly/capistrano-twingly/tree/v4.0.4) (2022-06-28)
+
+[Full Changelog](https://github.com/twingly/capistrano-twingly/compare/v4.0.3...v4.0.4)
+
+**Merged pull requests:**
+
+- Use net-ssh ~\> 7.0 [\#66](https://github.com/twingly/capistrano-twingly/pull/66) ([Pontus4](https://github.com/Pontus4))
+- Run CI on latest Rubies [\#64](https://github.com/twingly/capistrano-twingly/pull/64) ([walro](https://github.com/walro))
+- Ruby 3.0.0 on CI [\#62](https://github.com/twingly/capistrano-twingly/pull/62) ([walro](https://github.com/walro))
+
 ## [v4.0.3](https://github.com/twingly/capistrano-twingly/tree/v4.0.3) (2021-01-14)
 
 [Full Changelog](https://github.com/twingly/capistrano-twingly/compare/v4.0.2...v4.0.3)
