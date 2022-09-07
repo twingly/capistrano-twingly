@@ -10,7 +10,7 @@ jobs:
 
     strategy:
       matrix:
-        ruby: [2.7.3, 3.0.1, head]
+        ruby: [2.7.6, 3.0.4, 3.1.2]
 
     steps:
       - name: Checkout Code
