@@ -1,5 +1,18 @@
 # Changelog
 
+## [v4.1.0](https://github.com/twingly/capistrano-twingly/tree/v4.1.0) (2023-01-10)
+
+[Full Changelog](https://github.com/twingly/capistrano-twingly/compare/v4.0.4...v4.1.0)
+
+**Fixed bugs:**
+
+- Deploy broken in macOS 13 because of DNS issues [\#68](https://github.com/twingly/capistrano-twingly/issues/68)
+
+**Merged pull requests:**
+
+- Use datacenter gateway as fallback DNS server [\#69](https://github.com/twingly/capistrano-twingly/pull/69) ([roback](https://github.com/roback))
+- Keep GitHub Actions file up-to-date [\#67](https://github.com/twingly/capistrano-twingly/pull/67) ([roback](https://github.com/roback))
+
 ## [v4.0.4](https://github.com/twingly/capistrano-twingly/tree/v4.0.4) (2022-06-28)
 
 [Full Changelog](https://github.com/twingly/capistrano-twingly/compare/v4.0.3...v4.0.4)
