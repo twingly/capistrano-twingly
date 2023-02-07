@@ -1,5 +1,17 @@
 # Changelog
 
+## [v4.2.0](https://github.com/twingly/capistrano-twingly/tree/v4.2.0) (2023-02-07)
+
+[Full Changelog](https://github.com/twingly/capistrano-twingly/compare/v4.1.0...v4.2.0)
+
+**Closed issues:**
+
+- Nginx: be able to proxy\_set\_header when needed [\#41](https://github.com/twingly/capistrano-twingly/issues/41)
+
+**Merged pull requests:**
+
+- Make it possible to set `X-Forwarded-Proto` header to `https` [\#70](https://github.com/twingly/capistrano-twingly/pull/70) ([roback](https://github.com/roback))
+
 ## [v4.1.0](https://github.com/twingly/capistrano-twingly/tree/v4.1.0) (2023-01-10)
 
 [Full Changelog](https://github.com/twingly/capistrano-twingly/compare/v4.0.4...v4.1.0)
