@@ -47,6 +47,7 @@ require 'capistrano/twingly/nginx'
 set :app_name, 'contest-bamba'
 set :server_names, %w(bamba.bloggportalen.se)
 set :use_https, true # Optional
+set :forwarded_protocol_is_https, true # Optional
 
 namespace :deploy do
   after :finishing, 'deploy:nginx:generate_config'

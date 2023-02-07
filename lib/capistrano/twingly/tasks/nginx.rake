@@ -9,6 +9,7 @@ namespace :deploy do
       server_names = fetch(:server_names)
 
       https_port = ":443" if fetch(:use_https)
+      forwarded_protocol_is_https = fetch(:forwarded_protocol_is_https)
 
       conf = File.open('tmp/site.conf', 'w')
       conf << %Q{
@@ -42,6 +43,7 @@ namespace :deploy do
             proxy_set_header   Host             $host#{https_port};
             proxy_set_header   X-Real-IP        $remote_addr;
             proxy_set_header   X-Forwarded-For  $proxy_add_x_forwarded_for;
+            #{forwarded_protocol_is_https ? "proxy_set_header   X-Forwarded-Proto https;" : ""}
           }
         }\n}
         conf.close
