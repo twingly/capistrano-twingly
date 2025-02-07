@@ -1,5 +1,14 @@
 # Changelog
 
+## [v4.2.1](https://github.com/twingly/capistrano-twingly/tree/v4.2.1) (2025-02-07)
+
+[Full Changelog](https://github.com/twingly/capistrano-twingly/compare/v4.2.0...v4.2.1)
+
+**Merged pull requests:**
+
+- Support Ruby \>= 3.2 [\#72](https://github.com/twingly/capistrano-twingly/pull/72) ([Pontus4](https://github.com/Pontus4))
+- Run CI on latest Ruby versions [\#71](https://github.com/twingly/capistrano-twingly/pull/71) ([Pontus4](https://github.com/Pontus4))
+
 ## [v4.2.0](https://github.com/twingly/capistrano-twingly/tree/v4.2.0) (2023-02-07)
 
 [Full Changelog](https://github.com/twingly/capistrano-twingly/compare/v4.1.0...v4.2.0)
