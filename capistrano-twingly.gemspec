@@ -20,7 +20,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "capistrano", "~> 3.14"
   spec.add_dependency "capistrano-bundler", "~> 2.0"
   spec.add_dependency "capistrano-chruby", "0.1.2"
-  spec.add_dependency "foreman", "~> 0.82"
+  spec.add_dependency "foreman", "~> 0.88"
   spec.add_dependency "net-ssh", "~> 7.0"
   spec.add_dependency "ed25519", ">= 1.2", "< 1.3"
   spec.add_dependency "bcrypt_pbkdf", ">= 1.0", "< 2.0"
