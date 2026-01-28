@@ -1,3 +1,9 @@
+# Repository archived ☠️
+
+Twingly no longer uses this project for deploying applications.
+
+---
+
 # Capistrano::Twingly
 
 Capistrano 3 tasks used for Twingly's Ruby deployment
